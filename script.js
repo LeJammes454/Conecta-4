@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.dataset.col = col;
                 gameBoard.appendChild(cell);
                 cells[row][col] = cell;
+
+                // Añadir evento de clic a cada celda
+                cell.addEventListener('click', function() {
+                    if (!gameOver) {
+                        dropPiece(col); // Colocar ficha en la columna seleccionada
+                    }
+                });
             }
         }
     }
@@ -30,6 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Función para dejar caer una ficha en la columna seleccionada
+    function dropPiece(col) {
+        for (let row = 5; row >= 0; row--) {
+            if (!cells[row][col].classList.contains('red') && !cells[row][col].classList.contains('yellow')) {
+                cells[row][col].classList.add(currentPlayer);
+                currentPlayer = (currentPlayer === 'red') ? 'yellow' : 'red'; // Alternar jugador
+                break;
+            }
+        }
+    }
     // Escuchar el evento de clic en el botón de inicio
     startButton.addEventListener('click', function() {
         gameBoard.style.display = 'grid'; // Mostrar el tablero
