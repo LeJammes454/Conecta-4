@@ -1,29 +1,24 @@
-.game-board {
-    border: 2px solid #333;
-    padding-left: 2vh;
-    padding-bottom: 5vh;
-    width: 600px; /* Ajuste del ancho */
-    height: 700px; /* Ajuste de la altura */
+/* Estilos CSS para la cuadrícula */
+.board {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(7, 1fr);
-    background-color: #66b3ff;
+    grid-template-columns: repeat(6, 100px);
+    grid-template-rows: repeat(6, 100px);
+    gap: 5px;
 }
-
-
 .cell {
-    border: 1px solid #333;
-    background-color: #fff;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 10px;
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+            border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
 }
-
-.player-1 {
-    background-color: #ff6666;
+.red {
+    background-color: red;
 }
-
-.player-2 {
-    background-color: #66b3ff;
+.yellow {
+    background-color: yellow;
 }
