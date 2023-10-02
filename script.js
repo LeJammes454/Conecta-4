@@ -1,3 +1,5 @@
+let timerId; // Agrega esta línea para definir timerId como una variable global
+
 document.addEventListener('DOMContentLoaded', function () {
     const gameBoard = document.getElementById('board');
     const cells = [];
@@ -289,6 +291,22 @@ document.addEventListener('DOMContentLoaded', function () {
         if (document.querySelector('input[name="modoJuego"]:checked').value === 'ih') {
             playAI(); // Iniciamos el turno de la IA
         }
+
+        // Bloquear el tablero solo en el modo "IA vs IA"
+        if (document.querySelector('input[name="modoJuego"]:checked').value === 'ii') {
+            gameBoard.classList.add('disabled');
+        }
+
+        // Si está en el modo "IA vs IA", configuramos el temporizador
+        if (document.querySelector('input[name="modoJuego"]:checked').value === 'ii') {
+            // Iniciamos el turno de la primera IA después de 500 milisegundos
+            setTimeout(function () {
+                playAI();
+                // Establecemos un temporizador que alternará los turnos cada segundo
+                timerId = setInterval(playAI, 1000);
+            }, 500);
+        }
+
     });
 
     // Escuchar el evento de clic en el botón de reinicio
@@ -299,11 +317,24 @@ document.addEventListener('DOMContentLoaded', function () {
         modoRadios.forEach(radio => radio.disabled = false); // Desbloquear radios
         clearGrid(); // Limpiar el tablero cuando se reinicia el juego
 
+        // Desbloquear el tablero solo en el modo "IA vs IA"
+        if (document.querySelector('input[name="modoJuego"]:checked').value === 'ii') {
+            gameBoard.classList.remove('disabled');
+        }
+
+        // Reiniciamos el temporizador en caso de que esté activo
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null; // Reiniciamos la variable de temporizador
+        }
+
         // Resetear variables y configuraciones
         currentPlayer = 'red';
         gameOver = false;
+        isFirstMoveByAI = false;
 
-        console.log('Nueva parrtida')
+        console.log('Nueva partida');
     });
+
 
 });
