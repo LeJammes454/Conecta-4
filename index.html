@@ -11,6 +11,8 @@
     <div class="container">
         <h1 class="text-center my-4">Conecta 4</h1>
         <div class="row">
+
+            <!-- Menu de seleccion de modo de juego -->
             <div class="col-4">
                 <h4>Modo de Juego</h4>
                 <div class="form-check">
@@ -41,12 +43,16 @@
                 <button class="btn btn-secondary mt-4" id="reset-button" disabled>Reiniciar</button>
 
             </div>
+
             <div class="col-8">
+                
                 <div class="board" id="board">
                     <!-- Aquí se generarán las celdas de la cuadrícula -->
                 </div>
-            </div> 
+            </div>
+
             <div id="winner-modal" class="modal">
+                <!-- Modal para mostrar al ganador -->
                 <div class="modal-content">
                     <span id="winner-text"></span>
                 </div>

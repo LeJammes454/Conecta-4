@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const gameBoard = document.getElementById('board');
     const cells = [];
     let currentPlayer = 'red';
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 gameBoard.appendChild(cell);
                 cells[row][col] = cell;
 
-                cell.addEventListener('click', function() {
+                cell.addEventListener('click', function () {
                     if (!gameOver && !(isAIvsHuman && currentPlayer === 'yellow' && isFirstMoveByAI)) {
                         dropPiece(col);
                     }
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Escuchar cambios en los modos de juego
     modoRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
+        radio.addEventListener('change', function () {
             isHumanVsAI = (this.value === 'hi' || this.value === 'ih');
             isAIvsHuman = (this.value === 'ih');
         });
@@ -257,18 +257,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // En el modo "IA vs Humano", marcar que la primera jugada es de la IA
-        if (isAIvsHuman && currentPlayer === 'red' && !isFirstMoveByAI) {
-            isFirstMoveByAI = true;
-            playAI();
+        if (isAIvsHuman && currentPlayer === 'red') {
+            playAI(); // Es el turno de la IA
         }
     }
 
 
     // Función para que la IA juegue
-   function playAI() {
-    const bestMove = findBestMove();
-    dropPiece(bestMove);
-}
+    function playAI() {
+        const bestMove = findBestMove();
+        dropPiece(bestMove);
+    }
     // Función para limpiar la cuadrícula
     function clearGrid() {
         while (gameBoard.firstChild) {
@@ -286,9 +285,9 @@ document.addEventListener('DOMContentLoaded', function() {
         clearGrid(); // Limpiar el tablero antes de crear una nueva cuadrícula
         createGrid(); // Llamar a la función para crear la cuadrícula
 
-        // Si está en el modo "IA vs Humano", la IA juega primero
+        // Si está en el modo "IA vs Humano", la IA juega después de cada turno humano
         if (document.querySelector('input[name="modoJuego"]:checked').value === 'ih') {
-            playAI();
+            playAI(); // Iniciamos el turno de la IA
         }
     });
 
